@@ -13,6 +13,7 @@
   "author": "Mateja Petrovic <mateja176@gmail.com> (https://github.com/mateja176)",
   "license": "MIT",
   "dependencies": {
+    "apollo-server": "^2.18.2",
     "graphql": "^15.3.0",
     "mongodb": "^3.6.2"
   },
@@ -23,6 +24,7 @@
     "@graphql-codegen/typescript-mongodb": "1.17.8",
     "@graphql-codegen/typescript-resolvers": "1.17.10",
     "@types/mongodb": "^3.5.28",
+    "graphqlgen": "^0.6.0-rc9",
     "prettier": "^2.1.2"
   }
 }
