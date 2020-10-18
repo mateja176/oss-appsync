@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --write src",
     "codegen": "graphql-codegen --config codegen.yml",
-    "postcodegen": "npm run format"
+    "postcodegen": "npm run format",
+    "graphqlgen": "graphqlgen",
+    "postgraphqlgen": "npm run format"
   },
   "keywords": [],
   "author": "Mateja Petrovic <mateja176@gmail.com> (https://github.com/mateja176)",
