@@ -150,7 +150,7 @@ input TodoCreateInput {
   title: String!
   description: String!
   completed: Boolean!
-  author: User!
+  author: ID!
 }
 
 input UpdateTodoInput {
