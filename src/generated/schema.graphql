@@ -1,0 +1,133 @@
+type Query {
+  todo(id: ID!): Todo!
+  todos(limit: Int, offset: Int, filter: TodoFilter, sort: TodoSort): [Todo!]!
+}
+
+type Todo {
+  id: ID!
+  title: String!
+  description: String!
+  completed: Boolean!
+}
+
+type TodoFilter {
+  id: IDFilter
+  title: StringFilter
+  description: StringFilter
+  completed: BooleanFilter
+}
+
+type IDFilter {
+  equality: IDEquality
+}
+
+union IDEquality = IDEq | IDNe
+
+type IDEq {
+  eq: ID!
+}
+
+type IDNe {
+  ne: ID!
+}
+
+type StringFilter {
+  equality: StringEquality
+  contains: String
+  notContains: String
+  beginsWith: String
+}
+
+union StringEquality =
+    StringEq
+  | StringNe
+  | StringLe
+  | StringLt
+  | StringGe
+  | StringGt
+  | StringLeGe
+  | StringLeGt
+  | StringLtGe
+  | StringLtGt
+
+type StringEq {
+  eq: String!
+}
+
+type StringNe {
+  ne: String!
+}
+
+type StringLe {
+  le: String!
+}
+
+type StringLt {
+  lt: String!
+}
+
+type StringGe {
+  ge: String!
+}
+
+type StringGt {
+  gt: String!
+}
+
+type StringLeGe {
+  le: String!
+  ge: String!
+}
+
+type StringLeGt {
+  le: String!
+  gt: String!
+}
+
+type StringLtGe {
+  lt: String!
+  ge: String!
+}
+
+type StringLtGt {
+  lt: String!
+  gt: String!
+}
+
+type BooleanFilter {
+  equality: BooleanEquality
+}
+
+union BooleanEquality = BooleanEq | BooleanNe
+
+type BooleanEq {
+  eq: Boolean!
+}
+
+type BooleanNe {
+  ne: Boolean!
+}
+
+type TodoSort {
+  title: SortDirection!
+  description: SortDirection!
+  completed: SortDirection!
+}
+
+enum SortDirection {
+  asc
+  desc
+}
+
+type Mutation {
+  createTodo(input: Todo!): Todo!
+  updateTodo(input: UpdateTodoInput): Todo!
+  deleteTodo(id: ID!): Todo!
+}
+
+input UpdateTodoInput {
+  id: ID!
+  title: String
+  description: String
+  completed: Boolean
+}
