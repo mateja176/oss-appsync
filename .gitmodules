@@ -1,0 +1,3 @@
+[submodule "graphql-features"]
+	path = graphql-features
+	url = https://github.com/mateja176/graphql-features
