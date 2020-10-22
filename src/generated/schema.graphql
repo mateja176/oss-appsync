@@ -1,6 +1,8 @@
 type Query {
   todo(id: ID!): Todo!
   todos(limit: Int, offset: Int, filter: TodoFilter, sort: TodoSort): [Todo!]!
+  user(id: ID!): User!
+  users(limit: Int, offset: Int, filter: UserFilter, sort: UserSort): [User!]!
 }
 
 type Todo {
@@ -8,6 +10,12 @@ type Todo {
   title: String!
   description: String!
   completed: Boolean!
+  author: User!
+}
+
+type User {
+  id: ID!
+  name: String!
 }
 
 type TodoFilter {
@@ -112,6 +120,7 @@ type TodoSort {
   title: SortDirection!
   description: SortDirection!
   completed: SortDirection!
+  author: SortDirection!
 }
 
 enum SortDirection {
@@ -119,10 +128,22 @@ enum SortDirection {
   desc
 }
 
+type UserFilter {
+  id: IDFilter
+  name: StringFilter
+}
+
+type UserSort {
+  name: SortDirection!
+}
+
 type Mutation {
   createTodo(input: Todo!): Todo!
   updateTodo(input: UpdateTodoInput): Todo!
   deleteTodo(id: ID!): Todo!
+  createUser(input: User!): User!
+  updateUser(input: UpdateUserInput): User!
+  deleteUser(id: ID!): User!
 }
 
 input UpdateTodoInput {
@@ -130,9 +151,10 @@ input UpdateTodoInput {
   title: String
   description: String
   completed: Boolean
+  author: User
 }
 
-schema {
-  query: Query
-  mutation: Mutation
+input UpdateUserInput {
+  id: ID!
+  name: String
 }
