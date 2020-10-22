@@ -131,3 +131,8 @@ input UpdateTodoInput {
   description: String
   completed: Boolean
 }
+
+schema {
+  query: Query
+  mutation: Mutation
+}
