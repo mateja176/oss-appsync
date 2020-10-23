@@ -139,10 +139,10 @@ type UserSort {
 
 type Mutation {
   createTodo(input: TodoCreateInput!): Todo!
-  updateTodo(input: UpdateTodoInput): Todo!
+  updateTodo(input: TodoUpdateInput!): Todo!
   deleteTodo(id: ID!): Todo!
   createUser(input: UserCreateInput!): User!
-  updateUser(input: UpdateUserInput): User!
+  updateUser(input: UserUpdateInput!): User!
   deleteUser(id: ID!): User!
 }
 
@@ -153,19 +153,17 @@ input TodoCreateInput {
   author: ID!
 }
 
-input UpdateTodoInput {
-  id: ID!
+input TodoUpdateInput {
   title: String
   description: String
   completed: Boolean
-  author: User
+  author: ID
 }
 
 input UserCreateInput {
   name: String!
 }
 
-input UpdateUserInput {
-  id: ID!
+input UserUpdateInput {
   name: String
 }
