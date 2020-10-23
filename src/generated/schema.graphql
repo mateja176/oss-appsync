@@ -1,8 +1,18 @@
 type Query {
   todo(id: ID!): Todo!
-  todos(limit: Int, offset: Int, filter: TodoFilter, sort: TodoSort): [Todo!]!
+  todos(
+    limit: Int
+    offset: Int
+    filter: TodoFilterInput
+    sort: TodoSortInput
+  ): [Todo!]!
   user(id: ID!): User!
-  users(limit: Int, offset: Int, filter: UserFilter, sort: UserSort): [User!]!
+  users(
+    limit: Int
+    offset: Int
+    filter: UserFilterInput
+    sort: UserSortInput
+  ): [User!]!
 }
 
 type Todo {
@@ -18,14 +28,14 @@ type User {
   name: String!
 }
 
-type TodoFilter {
-  id: IDFilter
-  title: StringFilter
-  description: StringFilter
-  completed: BooleanFilter
+input TodoFilterInput {
+  id: IDFilterInput
+  title: StringFilterInput
+  description: StringFilterInput
+  completed: BooleanFilterInput
 }
 
-type IDFilter {
+input IDFilterInput {
   equality: IDEquality
 }
 
@@ -39,7 +49,7 @@ type IDNe {
   ne: ID!
 }
 
-type StringFilter {
+input StringFilterInput {
   equality: StringEquality
   contains: String
   notContains: String
@@ -102,7 +112,7 @@ type StringLtGt {
   gt: String!
 }
 
-type BooleanFilter {
+input BooleanFilterInput {
   equality: BooleanEquality
 }
 
@@ -116,7 +126,7 @@ type BooleanNe {
   ne: Boolean!
 }
 
-type TodoSort {
+input TodoSortInput {
   title: SortDirection!
   description: SortDirection!
   completed: SortDirection!
@@ -128,12 +138,12 @@ enum SortDirection {
   desc
 }
 
-type UserFilter {
-  id: IDFilter
-  name: StringFilter
+input UserFilterInput {
+  id: IDFilterInput
+  name: StringFilterInput
 }
 
-type UserSort {
+input UserSortInput {
   name: SortDirection!
 }
 
