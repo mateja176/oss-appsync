@@ -36,16 +36,7 @@ input TodoFilterInput {
 }
 
 input IDFilterInput {
-  equality: IDEquality
-}
-
-union IDEquality = IDEq | IDNe
-
-type IDEq {
   eq: ID!
-}
-
-type IDNe {
   ne: ID!
 }
 
@@ -56,73 +47,17 @@ input StringFilterInput {
   beginsWith: String
 }
 
-union StringEquality =
-    StringEq
-  | StringNe
-  | StringLe
-  | StringLt
-  | StringGe
-  | StringGt
-  | StringLeGe
-  | StringLeGt
-  | StringLtGe
-  | StringLtGt
-
-type StringEq {
+input StringEquality {
   eq: String!
-}
-
-type StringNe {
   ne: String!
-}
-
-type StringLe {
   le: String!
-}
-
-type StringLt {
-  lt: String!
-}
-
-type StringGe {
-  ge: String!
-}
-
-type StringGt {
-  gt: String!
-}
-
-type StringLeGe {
-  le: String!
-  ge: String!
-}
-
-type StringLeGt {
-  le: String!
-  gt: String!
-}
-
-type StringLtGe {
   lt: String!
   ge: String!
-}
-
-type StringLtGt {
-  lt: String!
   gt: String!
 }
 
 input BooleanFilterInput {
-  equality: BooleanEquality
-}
-
-union BooleanEquality = BooleanEq | BooleanNe
-
-type BooleanEq {
   eq: Boolean!
-}
-
-type BooleanNe {
   ne: Boolean!
 }
 
