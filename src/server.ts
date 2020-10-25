@@ -1,3 +1,4 @@
+import { DIRECTIVES } from '@graphql-codegen/typescript-mongodb';
 import { ApolloServer, gql, IResolvers } from 'apollo-server';
 import fs from 'fs';
 import { join } from 'path';
@@ -10,7 +11,7 @@ const typeDefs = gql(
 );
 
 const server = new ApolloServer({
-  typeDefs,
+  typeDefs: [DIRECTIVES, typeDefs],
   resolvers: resolvers as IResolvers,
 });
 
