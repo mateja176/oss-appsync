@@ -8,8 +8,7 @@
     "format": "prettier --write src",
     "codegen": "graphql-codegen --config codegen.yml",
     "postcodegen": "npm run format",
-    "graphqlgen": "graphqlgen",
-    "postgraphqlgen": "npm run format"
+    "graphqlgen": "graphqlgen"
   },
   "keywords": [],
   "author": "Mateja Petrovic <mateja176@gmail.com> (https://github.com/mateja176)",
