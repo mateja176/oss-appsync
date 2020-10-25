@@ -36,29 +36,28 @@ input TodoFilterInput {
 }
 
 input IDFilterInput {
-  eq: ID!
-  ne: ID!
+  equals: ID!
+  not: ID!
 }
 
 input StringFilterInput {
-  equality: StringEquality
-  contains: String
-  notContains: String
-  beginsWith: String
-}
-
-input StringEquality {
-  eq: String!
-  ne: String!
+  equals: String!
+  not: String!
   le: String!
   lt: String!
   ge: String!
   gt: String!
+  in: [String!]
+  notIn: [String!]
+  contains: String
+  notContains: String
+  startsWith: String
+  endsWith: String
 }
 
 input BooleanFilterInput {
-  eq: Boolean!
-  ne: Boolean!
+  equals: Boolean!
+  not: Boolean!
 }
 
 input TodoSortInput {
