@@ -45,8 +45,10 @@ input StringFilterInput {
   not: String!
   le: String!
   lt: String!
+  lte: String!
   ge: String!
   gt: String!
+  gte: String!
   in: [String!]
   notIn: [String!]
   contains: String
