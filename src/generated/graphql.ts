@@ -3,6 +3,10 @@ export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = {
   [K in keyof T]: T[K];
 };
+export type RequireFields<T, K extends keyof T> = {
+  [X in Exclude<keyof T, K>]?: T[X];
+} &
+  { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -14,7 +18,157 @@ export type Scalars = {
 
 export type Query = {
   __typename?: 'Query';
-  hello?: Maybe<Scalars['String']>;
+  todo: Todo;
+  todos: Array<Todo>;
+  user: User;
+  users: Array<User>;
+};
+
+export type QueryTodoArgs = {
+  id: Scalars['ID'];
+};
+
+export type QueryTodosArgs = {
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  filter?: Maybe<TodoFilterInput>;
+  sort?: Maybe<TodoSortInput>;
+};
+
+export type QueryUserArgs = {
+  id: Scalars['ID'];
+};
+
+export type QueryUsersArgs = {
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  filter?: Maybe<UserFilterInput>;
+  sort?: Maybe<UserSortInput>;
+};
+
+export type Todo = {
+  __typename?: 'Todo';
+  id: Scalars['ID'];
+  title: Scalars['String'];
+  description: Scalars['String'];
+  completed: Scalars['Boolean'];
+  author: User;
+};
+
+export type User = {
+  __typename?: 'User';
+  id: Scalars['ID'];
+  name: Scalars['String'];
+};
+
+export type TodoFilterInput = {
+  id?: Maybe<IdFilterInput>;
+  title?: Maybe<StringFilterInput>;
+  description?: Maybe<StringFilterInput>;
+  completed?: Maybe<BooleanFilterInput>;
+};
+
+export type IdFilterInput = {
+  eq: Scalars['ID'];
+  ne: Scalars['ID'];
+};
+
+export type StringFilterInput = {
+  equality?: Maybe<StringEquality>;
+  contains?: Maybe<Scalars['String']>;
+  notContains?: Maybe<Scalars['String']>;
+  beginsWith?: Maybe<Scalars['String']>;
+};
+
+export type StringEquality = {
+  eq: Scalars['String'];
+  ne: Scalars['String'];
+  le: Scalars['String'];
+  lt: Scalars['String'];
+  ge: Scalars['String'];
+  gt: Scalars['String'];
+};
+
+export type BooleanFilterInput = {
+  eq: Scalars['Boolean'];
+  ne: Scalars['Boolean'];
+};
+
+export type TodoSortInput = {
+  title: SortDirection;
+  description: SortDirection;
+  completed: SortDirection;
+  author: SortDirection;
+};
+
+export enum SortDirection {
+  Asc = 'asc',
+  Desc = 'desc',
+}
+
+export type UserFilterInput = {
+  id?: Maybe<IdFilterInput>;
+  name?: Maybe<StringFilterInput>;
+};
+
+export type UserSortInput = {
+  name: SortDirection;
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  createTodo: Todo;
+  updateTodo: Todo;
+  deleteTodo: Todo;
+  createUser: User;
+  updateUser: User;
+  deleteUser: User;
+};
+
+export type MutationCreateTodoArgs = {
+  input: TodoCreateInput;
+};
+
+export type MutationUpdateTodoArgs = {
+  input: TodoUpdateInput;
+};
+
+export type MutationDeleteTodoArgs = {
+  id: Scalars['ID'];
+};
+
+export type MutationCreateUserArgs = {
+  input: UserCreateInput;
+};
+
+export type MutationUpdateUserArgs = {
+  input: UserUpdateInput;
+};
+
+export type MutationDeleteUserArgs = {
+  id: Scalars['ID'];
+};
+
+export type TodoCreateInput = {
+  title: Scalars['String'];
+  description: Scalars['String'];
+  completed: Scalars['Boolean'];
+  author: Scalars['ID'];
+};
+
+export type TodoUpdateInput = {
+  title?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  completed?: Maybe<Scalars['Boolean']>;
+  author?: Maybe<Scalars['ID']>;
+};
+
+export type UserCreateInput = {
+  name: Scalars['String'];
+};
+
+export type UserUpdateInput = {
+  name?: Maybe<Scalars['String']>;
 };
 
 export type AdditionalEntityFields = {
@@ -139,17 +293,52 @@ export type DirectiveResolverFn<
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Query: ResolverTypeWrapper<{}>;
+  ID: ResolverTypeWrapper<Scalars['ID']>;
+  Int: ResolverTypeWrapper<Scalars['Int']>;
+  Todo: ResolverTypeWrapper<Todo>;
   String: ResolverTypeWrapper<Scalars['String']>;
-  AdditionalEntityFields: AdditionalEntityFields;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
+  User: ResolverTypeWrapper<User>;
+  TodoFilterInput: TodoFilterInput;
+  IDFilterInput: IdFilterInput;
+  StringFilterInput: StringFilterInput;
+  StringEquality: StringEquality;
+  BooleanFilterInput: BooleanFilterInput;
+  TodoSortInput: TodoSortInput;
+  SortDirection: SortDirection;
+  UserFilterInput: UserFilterInput;
+  UserSortInput: UserSortInput;
+  Mutation: ResolverTypeWrapper<{}>;
+  TodoCreateInput: TodoCreateInput;
+  TodoUpdateInput: TodoUpdateInput;
+  UserCreateInput: UserCreateInput;
+  UserUpdateInput: UserUpdateInput;
+  AdditionalEntityFields: AdditionalEntityFields;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Query: {};
+  ID: Scalars['ID'];
+  Int: Scalars['Int'];
+  Todo: Todo;
   String: Scalars['String'];
-  AdditionalEntityFields: AdditionalEntityFields;
   Boolean: Scalars['Boolean'];
+  User: User;
+  TodoFilterInput: TodoFilterInput;
+  IDFilterInput: IdFilterInput;
+  StringFilterInput: StringFilterInput;
+  StringEquality: StringEquality;
+  BooleanFilterInput: BooleanFilterInput;
+  TodoSortInput: TodoSortInput;
+  UserFilterInput: UserFilterInput;
+  UserSortInput: UserSortInput;
+  Mutation: {};
+  TodoCreateInput: TodoCreateInput;
+  TodoUpdateInput: TodoUpdateInput;
+  UserCreateInput: UserCreateInput;
+  UserUpdateInput: UserUpdateInput;
+  AdditionalEntityFields: AdditionalEntityFields;
 };
 
 export type UnionDirectiveArgs = {
@@ -237,11 +426,100 @@ export type QueryResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']
 > = {
-  hello?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  todo?: Resolver<
+    ResolversTypes['Todo'],
+    ParentType,
+    ContextType,
+    RequireFields<QueryTodoArgs, 'id'>
+  >;
+  todos?: Resolver<
+    Array<ResolversTypes['Todo']>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryTodosArgs, never>
+  >;
+  user?: Resolver<
+    ResolversTypes['User'],
+    ParentType,
+    ContextType,
+    RequireFields<QueryUserArgs, 'id'>
+  >;
+  users?: Resolver<
+    Array<ResolversTypes['User']>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryUsersArgs, never>
+  >;
+};
+
+export type TodoResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['Todo'] = ResolversParentTypes['Todo']
+> = {
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  completed?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  author?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type UserResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']
+> = {
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type MutationResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']
+> = {
+  createTodo?: Resolver<
+    ResolversTypes['Todo'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationCreateTodoArgs, 'input'>
+  >;
+  updateTodo?: Resolver<
+    ResolversTypes['Todo'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationUpdateTodoArgs, 'input'>
+  >;
+  deleteTodo?: Resolver<
+    ResolversTypes['Todo'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationDeleteTodoArgs, 'id'>
+  >;
+  createUser?: Resolver<
+    ResolversTypes['User'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationCreateUserArgs, 'input'>
+  >;
+  updateUser?: Resolver<
+    ResolversTypes['User'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationUpdateUserArgs, 'input'>
+  >;
+  deleteUser?: Resolver<
+    ResolversTypes['User'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationDeleteUserArgs, 'id'>
+  >;
 };
 
 export type Resolvers<ContextType = any> = {
   Query?: QueryResolvers<ContextType>;
+  Todo?: TodoResolvers<ContextType>;
+  User?: UserResolvers<ContextType>;
+  Mutation?: MutationResolvers<ContextType>;
 };
 
 /**
