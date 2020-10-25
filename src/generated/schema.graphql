@@ -4,14 +4,14 @@ type Query {
     limit: Int
     offset: Int
     filter: TodoFilterInput
-    sort: TodoSortInput
+    sort: [TodoSortInput]
   ): [Todo!]!
   user(id: ID!): User!
   users(
     limit: Int
     offset: Int
     filter: UserFilterInput
-    sort: UserSortInput
+    sort: [UserSortInput]
   ): [User!]!
 }
 

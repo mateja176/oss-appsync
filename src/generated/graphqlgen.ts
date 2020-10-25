@@ -59,7 +59,7 @@ export namespace QueryResolvers {
     limit?: number | null;
     offset?: number | null;
     filter?: TodoFilterInput | null;
-    sort?: TodoSortInput | null;
+    sort?: Array<TodoSortInput | null> | null;
   }
 
   export interface ArgsUser {
@@ -70,7 +70,7 @@ export namespace QueryResolvers {
     limit?: number | null;
     offset?: number | null;
     filter?: UserFilterInput | null;
-    sort?: UserSortInput | null;
+    sort?: Array<UserSortInput | null> | null;
   }
 
   export type TodoResolver =
