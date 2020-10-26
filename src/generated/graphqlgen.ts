@@ -16,39 +16,42 @@ export namespace QueryResolvers {
     completed?: BooleanFilterInput | null;
   }
   export interface TodoSortInput {
-    title: SortDirection;
-    description: SortDirection;
-    completed: SortDirection;
-    author: SortDirection;
+    title?: SortDirection | null;
+    description?: SortDirection | null;
+    completed?: SortDirection | null;
+    author?: SortDirection | null;
   }
   export interface UserFilterInput {
     id?: IDFilterInput | null;
     name?: StringFilterInput | null;
   }
   export interface UserSortInput {
-    name: SortDirection;
+    name?: SortDirection | null;
+    todos?: SortDirection | null;
   }
   export interface IDFilterInput {
-    eq: string;
-    ne: string;
+    equals: string;
+    not: string;
   }
   export interface StringFilterInput {
-    equality?: StringEquality | null;
-    contains?: string | null;
-    notContains?: string | null;
-    beginsWith?: string | null;
-  }
-  export interface BooleanFilterInput {
-    eq: boolean;
-    ne: boolean;
-  }
-  export interface StringEquality {
-    eq: string;
-    ne: string;
+    equals: string;
+    not: string;
     le: string;
     lt: string;
+    lte: string;
     ge: string;
     gt: string;
+    gte: string;
+    in?: string[] | null;
+    notIn?: string[] | null;
+    contains?: string | null;
+    notContains?: string | null;
+    startsWith?: string | null;
+    endsWith?: string | null;
+  }
+  export interface BooleanFilterInput {
+    equals: boolean;
+    not: boolean;
   }
 
   export interface ArgsTodo {
@@ -433,6 +436,23 @@ export namespace UserResolvers {
         ) => string | Promise<string>;
       };
 
+  export type TodosResolver =
+    | ((
+        parent: User,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo,
+      ) => Todo[] | Promise<Todo[]>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: User,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => Todo[] | Promise<Todo[]>;
+      };
+
   export interface Type {
     id:
       | ((
@@ -467,6 +487,23 @@ export namespace UserResolvers {
             info: GraphQLResolveInfo,
           ) => string | Promise<string>;
         };
+
+    todos:
+      | ((
+          parent: User,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => Todo[] | Promise<Todo[]>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: User,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo,
+          ) => Todo[] | Promise<Todo[]>;
+        };
   }
 }
 
@@ -480,6 +517,7 @@ export namespace MutationResolvers {
     author: string;
   }
   export interface TodoUpdateInput {
+    id: string;
     title?: string | null;
     description?: string | null;
     completed?: boolean | null;
@@ -487,9 +525,12 @@ export namespace MutationResolvers {
   }
   export interface UserCreateInput {
     name: string;
+    todos: Todo[];
   }
   export interface UserUpdateInput {
+    id: string;
     name?: string | null;
+    todos?: Todo[] | null;
   }
 
   export interface ArgsCreateTodo {
