@@ -26,6 +26,7 @@ type Todo {
 type User {
   id: ID!
   name: String!
+  todos: [Todo!]!
 }
 
 input TodoFilterInput {
@@ -81,6 +82,7 @@ input UserFilterInput {
 
 input UserSortInput {
   name: SortDirection!
+  todos: SortDirection!
 }
 
 type Mutation {
@@ -108,8 +110,10 @@ input TodoUpdateInput {
 
 input UserCreateInput {
   name: String!
+  todos: [Todo!]!
 }
 
 input UserUpdateInput {
   name: String
+  todos: [Todo!]
 }
