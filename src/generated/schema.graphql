@@ -102,6 +102,7 @@ input TodoCreateInput {
 }
 
 input TodoUpdateInput {
+  id: ID!
   title: String
   description: String
   completed: Boolean
@@ -114,6 +115,7 @@ input UserCreateInput {
 }
 
 input UserUpdateInput {
+  id: ID!
   name: String
   todos: [Todo!]
 }
