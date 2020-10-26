@@ -64,10 +64,10 @@ input BooleanFilterInput {
 }
 
 input TodoSortInput {
-  title: SortDirection!
-  description: SortDirection!
-  completed: SortDirection!
-  author: SortDirection!
+  title: SortDirection
+  description: SortDirection
+  completed: SortDirection
+  author: SortDirection
 }
 
 enum SortDirection {
@@ -81,8 +81,8 @@ input UserFilterInput {
 }
 
 input UserSortInput {
-  name: SortDirection!
-  todos: SortDirection!
+  name: SortDirection
+  todos: SortDirection
 }
 
 type Mutation {
